@@ -20,10 +20,10 @@ export function useGraphQL<TResult, TVariables>(
       document.definitions.find(isOperationDefinition)?.name,
       variables,
     ] as const,
-    (async (_key: string, variables: any) =>
+    async (_key: string, variables: any) =>
       executor({
         document,
         variables,
-      }) as Promise<ExecutionResult<TResult>>) as any
+      }) as Promise<ExecutionResult<TResult>>
   )
 }

@@ -2,7 +2,6 @@ import type { NextPage } from 'next'
 
 import { graphql } from '../gql'
 
-import styles from '../styles/Home.module.css'
 import Film from '../components/Film'
 import { useGraphQL } from '../hooks/use-query'
 
@@ -21,13 +20,12 @@ const AllFilmsWithVariablesQuery = graphql(/* GraphQL */ `
 const Home: NextPage = () => {
   const { data } = useGraphQL(AllFilmsWithVariablesQuery, { first: 10 })
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
+    <div>
+      <main>
         {data && (
           <ul>
             {data.data?.allFilms?.edges?.map(
-              (e: any, i: any) =>
-                e?.node && <Film film={e?.node} key={`film-${i}`} />
+              (e, i) => e?.node && <Film film={e?.node} key={`film-${i}`} />
             )}
           </ul>
         )}
